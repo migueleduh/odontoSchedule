@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 // Fingiremos que este hook nos dá os dados reais do Supabase
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../contexts/AuthContext';
 
 export function ProtectedRoute() {
     const { session, isLoading } = useAuth();

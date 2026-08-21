@@ -1,7 +1,7 @@
-import { useState} from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Aqui importamos aquele cliente que você criou!
-
 import { supabase } from '../service/supabase.ts';
 
 
@@ -18,11 +18,13 @@ export function LoginPage() {
 
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+
 
 
   // 2. Nossa função de envio
 
- 
+
 
   const handleLogin = async (e: React.SubmitEvent) => {
 
@@ -76,7 +78,9 @@ export function LoginPage() {
 
         console.log("Login realizado com sucesso!", data);
 
-        // Aqui futuramente faremos o redirecionamento para a Agenda
+        navigate('/agenda')
+
+        return 
 
       }
 
@@ -93,13 +97,13 @@ export function LoginPage() {
       // Desativamos o loading para liberar o formulário novamente.
 
       setLoading(false);
-      
+
 
     }
 
   };
 
-   
+
 
 
 
@@ -109,21 +113,21 @@ export function LoginPage() {
 
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
 
-       <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin}>
 
-            { error && <p>{error}</p> } 
-      
-            {/* 2. Como amarramos o valor do input à variável 'email' e atualizamos ao digitar? */}
-            <input className="border" type="email" value={email} onChange={(e) => setEmail(e.target.value)} 
-            />
+        {error && <p>{error}</p>}
 
-            <input type="password"  value={password} onChange={(e) => setPassword(e.target.value)} 
-            />
+        {/* 2. Como amarramos o valor do input à variável 'email' e atualizamos ao digitar? */}
+        <input className="border" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+        />
 
-            {/* 3. Como passamos a nossa variável de estado para  desabilitar o botão? */}
-            <button type="submit" disabled={loading}>
-                Entrar
-            </button>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+        />
+
+        {/* 3. Como passamos a nossa variável de estado para  desabilitar o botão? */}
+        <button type="submit" disabled={loading}>
+          Entrar
+        </button>
 
       </form>
     </div>
